@@ -57,7 +57,7 @@ end
 function find_nearest()
 	local closest_target = nil
 	local closest_distance = 999
-	
+
 	local s,error = pcall(function()
 		local range = camlock.config.range
 
@@ -72,7 +72,7 @@ function find_nearest()
 				if get_distance(human.Parent.HumanoidRootPart) < range then
 					local mouse_pos = Vector2.new(cursor.X, cursor.Y)
 					local vector, on_screen = cam:WorldToScreenPoint(human.Parent.HumanoidRootPart.Position)
-	
+
 					if on_screen then 
 						local dist = (mouse_pos - Vector2.new(vector.X, vector.Y)).Magnitude
 						if dist < closest_distance then 
@@ -164,7 +164,7 @@ end
 input_service.InputBegan:Connect(function(input)
 	local focused = input_service:GetFocusedTextBox()
 	if focused then return end
-		
+
 	if input.KeyCode == Enum.KeyCode[string.upper(camlock.config.keybind)] and camlock.enabled then
 		locking = not locking
 
@@ -195,19 +195,19 @@ coroutine.wrap(function()
 	run_service.Stepped:Connect(function()
 		if locking == true and target ~= nil then
 			if camlock.config.predictions == true then 
-				if target:FindFirstChild('HumanoidRootPart') target:FindFirstChild('Humanoid') then
+				if target:FindFirstChild('HumanoidRootPart') or target:FindFirstChild('Humanoid') then
 					local root = target:WaitForChild('HumanoidRootPart')
 					local human = target:WaitForChild('Humanoid')
 					local move_direction = human.MoveDirection
 					cam.CFrame = CFrame.lookAt(workspace.Camera.CFrame.Position, 
-					Vector3.new(
-						root.Position.X + move_direction.X * camlock.config.x_prediction, 
-						root.Position.Y + move_direction.Y * camlock.config.y_prediction, 
-						root.Position.Z + move_direction.Z * camlock.config.x_prediction
-					))
+						Vector3.new(
+							root.Position.X + move_direction.X * camlock.config.x_prediction, 
+							root.Position.Y + move_direction.Y * camlock.config.y_prediction, 
+							root.Position.Z + move_direction.Z * camlock.config.x_prediction
+						))
 				end
 			else
-				if target:FindFirstChild('HumanoidRootPart') target:FindFirstChild('Humanoid') then		
+				if target:FindFirstChild('HumanoidRootPart') or target:FindFirstChild('Humanoid') then		
 					local root = target:WaitForChild('HumanoidRootPart')
 					cam.CFrame = CFrame.lookAt(workspace.Camera.CFrame.Position, root.Position)
 				end
