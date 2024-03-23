@@ -19,7 +19,8 @@ camlock.config = {
 	keybind		= 'q',
 
 	range 		= 250,
-	prediction 	= 1.368,
+	x_prediction 	= 0,
+	y_prediction 	= 0,
 
 	notifications   = false,
 	predictions     = false,
@@ -191,9 +192,9 @@ coroutine.wrap(function()
 				local human = target.Humanoid
 				local move_direction = human.MoveDirection
 				cam.CFrame = CFrame.lookAt(workspace.Camera.CFrame.Position, 
-					Vector3.new(root.Position.X + move_direction.X * camlock.config.prediction, 
-						root.Position.Y + move_direction.Y * camlock.config.prediction, 
-						root.Position.Z + move_direction.Z * camlock.config.prediction
+					Vector3.new(root.Position.X + move_direction.X * camlock.config.x_prediction, 
+						root.Position.Y + move_direction.Y * camlock.config.y_prediction, 
+						root.Position.Z + move_direction.Z * camlock.config.x_prediction
 					))
 			else
 				cam.CFrame = CFrame.lookAt(workspace.Camera.CFrame.Position, target.HumanoidRootPart.Position)
