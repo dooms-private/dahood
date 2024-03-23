@@ -400,8 +400,12 @@ keybind = camlock_category.new_keybind('keybind', 'q', function()
 	camlock.config.keybind = keybind.key
 end)
 
-prediction = camlock_category.new_textbox('prediction', '1.368', function()
-	camlock.config.prediction = tonumber(prediction.text)
+x_prediction = camlock_category.new_textbox('x prediction', '0', function()
+	camlock.config.x_prediction = tonumber(x_prediction.text)
+end)
+
+y_prediction = camlock_category.new_textbox('y prediction', '0', function()
+	camlock.config.y_prediction = tonumber(y_prediction.text)
 end)
 
 range = camlock_category.new_textbox('range', '250', function()
