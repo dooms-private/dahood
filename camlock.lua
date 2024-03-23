@@ -12,7 +12,8 @@
 local encrypt = loadstring(game:HttpGet('https://raw.githubusercontent.com/dooms-scripts/ui-libraries/main/encrypt-notifications.lua'))()
 
 camlock = {
-	enabled = true
+	enabled = true,
+	version = 'v1.4.1',
 }
 
 camlock.config = {
@@ -50,6 +51,10 @@ local target = nil
 
 -->> Functions
 function get_distance(obj)
+	local plr = players.LocalPlayer
+	local char = plr.Character or plr.CharacterAdded:Wait()
+	local root = char:WaitForChild('HumanoidRootPart')
+	
 	local distance = (root.Position - obj.Position).Magnitude
 	return distance
 end
@@ -216,6 +221,6 @@ coroutine.wrap(function()
 	end)
 end)()
 
-warn("doom's camlock loaded v1.4.0")
+warn("doom's camlock loaded; ".. camlock.version)
 
 return camlock
