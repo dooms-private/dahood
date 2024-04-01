@@ -48,9 +48,9 @@ function distance_check(object)
 end
 
 -- loading UI library
-local encrypt_lib = loadstring(game:HttpGet('https://raw.githubusercontent.com/dooms-scripts/ui-libraries/main/encrypt'))()
-local encrypt_notifications = loadstring(game:HttpGet('https://raw.githubusercontent.com/dooms-scripts/ui-libraries/main/encrypt-notifications.lua'))()
-local camlock = loadstring(game:HttpGet('https://raw.githubusercontent.com/dooms-private/dahood/main/camlock.lua'))()
+local encrypt_lib = loadstring(game:HttpGet('https://raw.githubusercontent.com/dooms-scripts/ui-libraries/main/encrypt/encrypt-old.lua'))()
+local encrypt_notifications = loadstring(game:HttpGet('https://raw.githubusercontent.com/dooms-scripts/ui-libraries/main/encrypt/encrypt-notifications.lua'))()
+local camlock = loadstring(game:HttpGet('https://raw.githubusercontent.com/dooms-private/dahood/main/camlock'))()
 local aimbot = loadstring(game:HttpGet('https://raw.githubusercontent.com/dooms-scripts/dahood/main/dooms-aimbot.lua'))()
 
 camlock.config.custom_text = 'thugshaker v2'
@@ -186,28 +186,28 @@ coroutine.wrap(function()
 end)()
 
 coroutine.wrap(function()
-		run_service.Stepped:Connect(function()
-				task.wait()
-				if noclipping then
-						local char = plr.Character or plr.CharacterAdded:Wait()
-						for _, basePart in ipairs(char:GetDescendants()) do
-								if basePart:IsA('BasePart') then
-										if basePart.Name == 'RootRigAttachment' then return end
-										basePart.CanCollide = false
-								end
-						end
+	run_service.Stepped:Connect(function()
+		task.wait()
+		if noclipping then
+			local char = plr.Character or plr.CharacterAdded:Wait()
+			for _, basePart in ipairs(char:GetDescendants()) do
+				if basePart:IsA('BasePart') then
+					if basePart.Name == 'RootRigAttachment' then return end
+					basePart.CanCollide = false
 				end
+			end
+		end
 
-				if not noclipping then
-						local char = plr.Character or plr.CharacterAdded:Wait()
-						for _, basePart in ipairs(char:GetDescendants()) do
-							if basePart:IsA('BasePart') and basePart.Name == 'UpperTorso' or 'LowerTorso' or 'HumanoidRootPart'  then
-										if basePart.Name == 'RootRigAttachment' then return end
-										basePart.CanCollide = true
-								end
-						end
+		if not noclipping then
+			local char = plr.Character or plr.CharacterAdded:Wait()
+			for _, basePart in ipairs(char:GetDescendants()) do
+				if basePart:IsA('BasePart') and basePart.Name == 'UpperTorso' or 'LowerTorso' or 'HumanoidRootPart'  then
+					if basePart.Name == 'RootRigAttachment' then return end
+					basePart.CanCollide = true
 				end
-		end)
+			end
+		end
+	end)
 end)()
 
 cframe_walk_toggle = player_category.new_toggle('cframe walk', function()
@@ -227,14 +227,14 @@ end)
 
 player_category.new_text('noclip').alignment('center')
 noclip_toggle = player_category.new_toggle('noclip', function()
-		encrypt_notifications.notify('<font face="Gotham"><font color="rgb(255,12,243)">thugshaker v2</font></font><font face="SourceSans"><font color="rgb(255,255,255)"> > noclip: '..tostring(noclipping)..'</font></font>', 3)
-		noclip_enabled = not noclip_enabled
+	encrypt_notifications.notify('<font face="Gotham"><font color="rgb(255,12,243)">thugshaker v2</font></font><font face="SourceSans"><font color="rgb(255,255,255)"> > noclip: '..tostring(noclipping)..'</font></font>', 3)
+	noclip_enabled = not noclip_enabled
 end)
 
 noclip_keybind = player_category.new_keybind('noclip keybind', function()
-		if noclip_enabled then
-				noclipping = not noclipping
-		end
+	if noclip_enabled then
+		noclipping = not noclipping
+	end
 end)
 
 -- autobuy tab
