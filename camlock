@@ -9,7 +9,7 @@
 	> lot more customizeable
 ]]--
 
-local encrypt = loadstring(game:HttpGet('https://raw.githubusercontent.com/dooms-scripts/ui-libraries/main/encrypt-notifications.lua'))()
+local encrypt = loadstring(game:HttpGet('https://raw.githubusercontent.com/dooms-scripts/ui-libraries/main/encrypt/encrypt-notifications.lua'))()
 
 camlock = {
 	enabled = true,
