@@ -73,6 +73,23 @@ local esp_tab = window.new_tab('esp')
 group1 = main_tab.new_group('group1')
 gui = group1.new_category('GUI')
 
+coroutine.wrap(function()
+		while cash_aura do
+			task.wait(0.1)
+			local char = plr.Character or plr.CharacterAdded:Wait()
+			local root = char:WaitForChild('HumanoidRootPart')
+			for _, money in ipairs(workspace.Ignored.Drop:GetChildren()) do
+				if money.Name == 'MoneyDrop' and distance_check(money) < 16 then
+					local s, err = pcall(function()
+						fireclickdetector(money.ClickDetector)
+					end)
+
+					if err then warn('err') end
+				end
+			end
+		end
+	end)()
+
 --toggle_bind = gui.new_textbox('toggle gui', toggle_keybind, function() toggle_keybind = toggle_bind.text end)
 gui.new_keybind('toggle gui', 'x', function()
 	encrypt_lib:toggle()
@@ -141,22 +158,7 @@ end)
 game_category.new_toggle('cash aura', function()
 	cash_aura = not cash_aura
 	encrypt_notifications.notify('<font face="Gotham"><font color="rgb(255,12,243)">thugshaker v2</font></font><font face="SourceSans"><font color="rgb(255,255,255)"> > cash aura: '..tostring(cash_aura)..'</font></font>', 3)
-	coroutine.wrap(function()
-		while cash_aura do
-			task.wait(0.1)
-			local char = plr.Character or plr.CharacterAdded:Wait()
-			local root = char:WaitForChild('HumanoidRootPart')
-			for _, money in ipairs(workspace.Ignored.Drop:GetChildren()) do
-				if money.Name == 'MoneyDrop' and distance_check(money) < 16 then
-					local s, err = pcall(function()
-						fireclickdetector(money.ClickDetector)
-					end)
-
-					if err then warn('err') end
-				end
-			end
-		end
-	end)()
+	
 end)
 
 game_category.new_button('rejoin server', function()
