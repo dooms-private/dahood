@@ -159,7 +159,7 @@ end
 
 function unlock()
 	target = nil
-	clear_assets()
+	-- clear_assets()
 	if camlock.config.notifications == true then
 		encrypt.notify('<font face="Gotham"><font color="rgb(255,12,243)">'..camlock.config.custom_text..'</font></font><font face="SourceSans"><font color="rgb(255,255,255)"> > unlocked camera.</font></font>', 1)
 	end
@@ -181,10 +181,10 @@ input_service.InputBegan:Connect(function(input)
 					encrypt.notify('<font face="Gotham"><font color="rgb(255,12,243)">'..camlock.config.custom_text..'</font></font><font face="SourceSans"><font color="rgb(255,255,255)"> > Target could not be found</font></font>', 1) 
 				end
 			elseif target ~= nil then
-				clear_assets()		
-				if camlock.config.labels == true then create_label(target) end
-				if camlock.config.borders == true then create_outline(target) end
-				if camlock.config.highlights == true then create_highlight(target) end
+				-- clear_assets()		
+				-- if camlock.config.labels == true then create_label(target) end
+				-- if camlock.config.borders == true then create_outline(target) end
+				-- if camlock.config.highlights == true then create_highlight(target) end
 				if camlock.config.notifications == true then 
 					encrypt.notify('<font face="Gotham"><font color="rgb(255,12,243)">'..camlock.config.custom_text..'</font></font><font face="SourceSans"><font color="rgb(255,255,255)"> > target: '..target.Name..'</font></font>', 1) 
 				end
